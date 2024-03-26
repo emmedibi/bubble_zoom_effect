@@ -1,0 +1,50 @@
+.covers {
+    --cover-count: 10;
+    --cover-size: 100px;
+    --column-size: calc(var(--cover-size)/2);
+    --transition-duration: 500ms;
+    display: grid;
+    grid-template-columns: repeat(var(--cover-count), var(--column-size));
+    transition: grid-template-columns 500ms;
+    transition-delay: var(--transition-duration);
+
+    /* max-width: 150vw; */
+    padding-block: 2rem;
+    /* overflow-x: auto; */
+
+}
+
+.cover {
+    width: var(--cover-size);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 100vw;
+    border: 5px solid white;
+    box-shadow: .25rem .25rem .5rem hsl(0, 0% 0% / .2);
+    transition: scale var(--transition-duration);
+
+}
+
+.covers:hover,
+.covers:focus-within {
+    --column-size: calc(var(--cover-size)*1.15);
+    transition-delay: 0ms;
+}
+
+
+.cover:hover,
+.cover.focus {
+    scale: 1.5;
+    z-index: 1.5;
+}
+
+body {
+    background-color:cadetblue;
+}
+
+@supports selector(:has(+ *)) {
+    .cover:hover + .cover,
+    .cover:has( + .cover:hover) {
+        scale: 1.05;
+    }
+}
